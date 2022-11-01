@@ -11,14 +11,16 @@ class Aviso
     private string $customerAccountNumber;
     private string $customerName;
     private DateTimeImmutable $date;
-    private string $from;
     private string $messageId;
     private string $textMessage;
     private string $returnPath;
     private string $to;
     private string $variableSymbol;
+    private string $subject;
+    private string $from;
 
-    public function getAmount(): string
+
+    public function getAmount(): float
     {
         return $this->amount;
     }
@@ -136,6 +138,17 @@ class Aviso
     public function setTextMessage(string $textMessage): Aviso
     {
         $this->textMessage = $textMessage;
+        return $this;
+    }
+
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): Aviso
+    {
+        $this->subject = $subject;
         return $this;
     }
 }

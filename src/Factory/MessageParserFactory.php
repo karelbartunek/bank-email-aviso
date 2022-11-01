@@ -15,9 +15,12 @@ class MessageParserFactory
 
         $bodyMessage = $parser->getMessageBody();
 
+        $to = $parser->getHeader('to');
         $from = $parser->getHeader('from');
+        $subject = $parser->getHeader('subject');
+
         $config = Map::findByFrom($from);
 
-        return new MessageParser($config, $bodyMessage);
+        return new MessageParser($config, $bodyMessage, $from, $to, $subject);
     }
 }

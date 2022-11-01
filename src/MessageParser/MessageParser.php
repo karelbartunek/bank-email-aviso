@@ -11,14 +11,20 @@ class MessageParser
 {
     private array $config;
     private string $emailBody;
+    private string $from;
+    private string $to;
+    private string $subject;
 
-    public function __construct(array $config, string $emailBody)
+    public function __construct(array $config, string $emailBody, string $from, string $to, string $subject)
     {
         $this->config = $config;
 
         $emailBody = preg_replace('/\xc2\xa0/', ' ', $emailBody);
 
         $this->emailBody = mb_convert_encoding($emailBody, 'UTF-8');
+        $this->from = $from;
+        $this->to = $to;
+        $this->subject = $subject;
     }
 
     public function __invoke(): Aviso
@@ -32,7 +38,10 @@ class MessageParser
             ->setCustomerAccountNumber($this->parseCustomerAccountNumber($this->emailBody))
             ->setTextMessage($this->parseTextMessage($this->emailBody))
             ->setCustomerName($this->parseCustomerName($this->emailBody))
-            ->setVariableSymbol($this->parseVariableSymbol($this->emailBody));
+            ->setVariableSymbol($this->parseVariableSymbol($this->emailBody))
+            ->setSubject($this->subject)
+            ->setFrom($this->from)
+            ->setTo($this->to);
     }
 
     public function parseDate(string $emailBody): DateTimeImmutable
