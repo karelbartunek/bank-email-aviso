@@ -1,0 +1,24 @@
+{
+    "name": "karelbartunek/bank-email-aviso",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "KarelBartunek\\BankEmailAvisoParser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Karel Bartunek",
+            "email": "post@karel-bartunek.cz",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php-mime-mail-parser/php-mime-mail-parser": "^7.1",
+        "ext-mbstring": "*",
+        "brick/money": "^0.7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
