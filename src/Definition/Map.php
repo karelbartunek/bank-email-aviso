@@ -17,7 +17,8 @@ class Map
                     'customerAccountNumber' => "'Účet protistrany: (.*?)[\r\n]'si",
                     'customerName' => "'Název protistrany: (.*?)[\r\n]'si",
                     'textMessage' => "'Zpráva příjemci: (.*?)[\r\n]'si",
-                    'variableSymbol' => "'Variabilní symbol: (.*?)[\r\n]'si"
+                    'variableSymbol' => "'Variabilní symbol: (.*?)[\r\n]'si",
+                    'constantSymbol' => "'Konstantni symbol: (.*?)[\r\n]'si",
                 ]
             ]
         ]

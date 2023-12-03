@@ -39,6 +39,7 @@ class MessageParser
             ->setTextMessage($this->parseTextMessage($this->emailBody))
             ->setCustomerName($this->parseCustomerName($this->emailBody))
             ->setVariableSymbol($this->parseVariableSymbol($this->emailBody))
+            ->setConstantSymbol($this->parseConstantSymbol($this->emailBody))
             ->setSubject($this->subject)
             ->setFrom($this->from)
             ->setTo($this->to);
@@ -70,6 +71,10 @@ class MessageParser
     {
         preg_match($this->config['regex']['cs']['customerAccountNumber'], $emailBody, $match);
 
+        if (empty($match)) {
+            return '';
+        }
+
         return $match[1];
     }
 
@@ -90,6 +95,13 @@ class MessageParser
     public function parseVariableSymbol(string $emailBody): string
     {
         preg_match($this->config['regex']['cs']['variableSymbol'], $emailBody, $match);
+
+        return trim($match[1]);
+    }
+
+    private function parseConstantSymbol(bool $emailBody)
+    {
+        preg_match($this->config['regex']['cs']['constantSymbol'], $emailBody, $match);
 
         return trim($match[1]);
     }

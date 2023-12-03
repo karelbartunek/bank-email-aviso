@@ -1,0 +1,35 @@
+Return-Path: <notification@csob.cz>
+Received: from mm2a2.csob.cz (mm2a2.csob.cz [193.245.36.14])
+ by xxx.com with SMTP id xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ for test@example.com;
+ Sun, 29 Jan 2023 00:18:16 +0000 (UTC)
+Date: Sun, 29 Jan 2023 01:18:18 +0100 (CET)
+From: CSOB Notification <notification@csob.cz>
+To: test@example.com
+Message-ID: <abcdefghijklmnopqrstuvwxyz>
+Subject: =?utf-8?Q?CEB_Info:_Za=C3=BA=C4=8Dtov=C3=A1n=C3=AD_platby?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+V=C3=A1=C5=BEen=C3=BD kliente,
+
+dne 28.1.2023 byla na =C3=BA=C4=8Dtu 123456789 za=C3=BA=C4=8Dtov=C3=A1na tr=
+ansakce typu: Za veden=C3=AD =C3=BA=C4=8Dtu, v=C3=BDpisy a transakce.
+
+N=C3=A1zev smlouvy: Example Company s.r.o.=20
+=C4=8C=C3=ADslo smlouvy: 12345678
+Majitel smlouvy: Example Company s.r.o.
+=C3=9A=C4=8Det: 12345678, CZK, Test Account
+=C4=8C=C3=A1stka: -85,00 CZK
+N=C3=A1zev protistrany: Service Fees
+Konstantn=C3=AD symbol: 0898
+Zpr=C3=A1va p=C5=99=C3=ADjemci: Za veden=C3=AD =C3=BA=C4=8Dtu a v=C3=BDpisu=
+: 80,00
+Za transakce: 5,00       =20
+
+Z=C5=AFstatek na =C3=BA=C4=8Dtu po za=C3=BA=C4=8Dtov=C3=A1n=C3=AD transakce=
+: +9=C2=A0999,99 CZK.
+
+S p=C5=99=C3=A1n=C3=ADm kr=C3=A1sn=C3=A9ho dne
+Va=C5=A1e =C4=8CSOB

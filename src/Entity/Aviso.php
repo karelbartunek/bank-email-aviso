@@ -16,6 +16,7 @@ class Aviso
     private string $returnPath;
     private string $to;
     private string $variableSymbol;
+    private string $constantSymbol;
     private string $subject;
     private string $from;
 
@@ -116,6 +117,17 @@ class Aviso
     public function setVariableSymbol(string $variableSymbol): Aviso
     {
         $this->variableSymbol = $variableSymbol;
+        return $this;
+    }
+
+    public function getConstantSymbol(): string
+    {
+        return $this->constantSymbol;
+    }
+
+    public function setConstantSymbol(string $constantSymbol): Aviso
+    {
+        $this->constantSymbol = $constantSymbol;
         return $this;
     }
 
