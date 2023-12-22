@@ -8,13 +8,17 @@ use PhpMimeMailParser\Parser;
 
 class MessageParserFactory
 {
-    public static function create(string $rawContent): MessageParser
+    public static function create(string $rawContent): ?MessageParser
     {
         $parser = new Parser();
         $parser->setText($rawContent);
 
-        $bodyMessage = $parser->getMessageBody();
+        $parts = $parser->getParts();
+        if (!isset($parts[1]['headers']['return-path']) || !isset($parts[1]['headers']['content-transfer-encoding'])) {
+            return null;
+        }
 
+        $bodyMessage = $parser->getMessageBody();
         $to = $parser->getHeader('to');
         $from = $parser->getHeader('from');
         $subject = $parser->getHeader('subject');

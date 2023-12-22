@@ -1,0 +1,34 @@
+Return-Path: <notification@csob.cz>
+Received: from mm2b2.csob.cz (mm2b2.csob.cz [193.245.36.24])
+ by xxx.com with SMTP id xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ for test@example.com;
+ Fri, 14 Oct 2022 00:00:00 +0000 (UTC)
+Date: Thu, 21 Dec 2023 16:13:36 +0100 (CET)
+From: CSOB Notification <notification@csob.cz>
+To: test@example.com
+Message-ID: <abcdefghijklmnopqrstuvwxyz>
+Subject: =?utf-8?Q?CEB_Info:_Za=C3=BA=C4=8Dtov=C3=A1n=C3=AD_platby?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+V=C3=A1=C5=BEen=C3=BD kliente,
+
+dne 21.12.2023 byla na =C3=BA=C4=8Dtu 666666666 za=C3=BA=C4=8Dtov=C3=A1na t=
+ransakce typu: P=C5=99=C3=ADchoz=C3=AD =C3=BAhrada okam=C5=BEit=C3=A1.
+
+N=C3=A1zev smlouvy: No Name Company s.r.o.
+=C4=8C=C3=ADslo smlouvy: 88888888
+Majitel smlouvy: Example Company s.r.o.
+=C3=9A=C4=8Det: 12345678, CZK, No name =C3=BA=C4=8Det
+=C4=8C=C3=A1stka: -3=C2=A0499,00 CZK
+=C3=9A=C4=8Det protistrany: 1234567890/0800
+N=C3=A1zev protistrany: Nov=C3=A1kov=C3=A1 Petúnie
+Variabiln=C3=AD symbol: 999230001
+Zpr=C3=A1va p=C5=99=C3=ADjemci: Darkove poukazy
+
+Z=C5=AFstatek na =C3=BA=C4=8Dtu po za=C3=BA=C4=8Dtov=C3=A1n=C3=AD transakce=
+: 3=C2=A0499,26 CZK.
+
+S p=C5=99=C3=A1n=C3=ADm kr=C3=A1sn=C3=A9ho dne
+Va=C5=A1e =C4=8CSOB

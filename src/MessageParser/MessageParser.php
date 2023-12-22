@@ -21,7 +21,7 @@ class MessageParser
 
         $emailBody = preg_replace('/\xc2\xa0/', ' ', $emailBody);
 
-        $this->emailBody = mb_convert_encoding($emailBody, 'UTF-8');
+        $this->emailBody = quoted_printable_decode($emailBody);
         $this->from = $from;
         $this->to = $to;
         $this->subject = $subject;

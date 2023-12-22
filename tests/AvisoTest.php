@@ -7,7 +7,7 @@ final class AvisoTest extends TestCase
 {
     public function testBankCsob(): void
     {
-        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/csob.txt');
+        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/csob_0.txt');
 
         $avisoParser = new AvisoParser();
         $aviso = $avisoParser($rawContent);
@@ -136,6 +136,59 @@ final class AvisoTest extends TestCase
         $this->assertEquals(
             '',
             $aviso->getConstantSymbol()
+        );
+    }
+
+    public function testBankCsob3(): void
+    {
+        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/csob_3.txt');
+
+        $avisoParser = new AvisoParser();
+        $aviso = $avisoParser($rawContent);
+
+        $this->assertEquals(
+            DateTimeImmutable::createFromFormat('d.m.Y h:i:s', '21.12.2023 00:00:00'),
+            $aviso->getDate()
+        );
+
+        $this->assertEquals(
+            3499,
+            $aviso->getAmount()
+        );
+
+        $this->assertEquals(
+            'CZK',
+            $aviso->getCurrency()
+        );
+
+        $this->assertEquals(
+            '1234567890/0800',
+            $aviso->getCustomerAccountNumber()
+        );
+
+        $this->assertEquals(
+            'Darkove poukazy',
+            $aviso->getTextMessage()
+        );
+
+        $this->assertEquals(
+            'Nováková Petúnie',
+            $aviso->getCustomerName()
+        );
+
+        $this->assertEquals(
+            '999230001',
+            $aviso->getVariableSymbol()
+        );
+
+        $this->assertEquals(
+            '',
+            $aviso->getConstantSymbol()
+        );
+
+        $this->assertEquals(
+            'CEB Info: Zaúčtování platby',
+            $aviso->getSubject()
         );
     }
 }
