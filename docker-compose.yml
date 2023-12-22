@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+    php81:
+        build:
+            context: .docker/php/8.1
+            args:
+                TIMEZONE: ${TIMEZONE}
+        volumes:
+            - ./:/var/www
+    php74:
+        build:
+            context: .docker/php/7.4
+            args:
+                TIMEZONE: ${TIMEZONE}
+        volumes:
+            - ./:/var/www
+volumes:
+    aviso:
