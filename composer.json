@@ -16,7 +16,7 @@
     "require": {
         "ext-mbstring": "*",
         "ext-mailparse": "*",
-        "brick/money": "^0.7",
+        "brick/money": "^0.9",
         "php-mime-mail-parser/php-mime-mail-parser": "^8.0.2"
     },
     "require-dev": {
