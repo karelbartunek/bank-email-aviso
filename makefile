@@ -5,4 +5,4 @@ PWD = $$(pwd)
 	cat makefile
 
 phpunit:
-	docker exec -i package_php74_1 vendor/bin/phpunit tests
+	docker exec -i package_php81_1 vendor/bin/phpunit tests
