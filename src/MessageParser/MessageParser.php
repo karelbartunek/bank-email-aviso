@@ -92,16 +92,24 @@ class MessageParser
         return trim($match[1]);
     }
 
-    public function parseVariableSymbol(string $emailBody): string
+    public function parseVariableSymbol(string $emailBody): ?string
     {
         preg_match($this->config['regex']['cs']['variableSymbol'], $emailBody, $match);
+
+        if (!isset($match[1])) {
+            return null;
+        }
 
         return trim($match[1]);
     }
 
-    private function parseConstantSymbol(bool $emailBody)
+    private function parseConstantSymbol(bool $emailBody): ?string
     {
         preg_match($this->config['regex']['cs']['constantSymbol'], $emailBody, $match);
+
+        if (!isset($match[1])) {
+            return null;
+        }
 
         return trim($match[1]);
     }

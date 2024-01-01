@@ -129,12 +129,12 @@ final class AvisoTest extends TestCase
         );
 
         $this->assertEquals(
-            '',
+            null,
             $aviso->getVariableSymbol()
         );
 
         $this->assertEquals(
-            '',
+            '0898',
             $aviso->getConstantSymbol()
         );
     }
@@ -182,7 +182,7 @@ final class AvisoTest extends TestCase
         );
 
         $this->assertEquals(
-            '',
+            null,
             $aviso->getConstantSymbol()
         );
 
