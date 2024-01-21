@@ -9,10 +9,10 @@ class Aviso
     private float $amount;
     private string $currency;
     private string $customerAccountNumber;
-    private string $customerName;
+    private ?string $customerName;
     private DateTimeImmutable $date;
     private string $messageId;
-    private string $textMessage;
+    private ?string $textMessage;
     private string $returnPath;
     private string $to;
     private ?string $variableSymbol;
@@ -43,12 +43,12 @@ class Aviso
         return $this;
     }
 
-    public function getCustomerName(): string
+    public function getCustomerName(): ?string
     {
         return $this->customerName;
     }
 
-    public function setCustomerName(string $customerName): Aviso
+    public function setCustomerName(?string $customerName): Aviso
     {
         $this->customerName = $customerName;
         return $this;
@@ -142,12 +142,12 @@ class Aviso
         return $this->currency;
     }
 
-    public function getTextMessage(): string
+    public function getTextMessage(): ?string
     {
         return $this->textMessage;
     }
 
-    public function setTextMessage(string $textMessage): Aviso
+    public function setTextMessage(?string $textMessage): Aviso
     {
         $this->textMessage = $textMessage;
         return $this;

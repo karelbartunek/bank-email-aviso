@@ -191,4 +191,29 @@ final class AvisoTest extends TestCase
             $aviso->getSubject()
         );
     }
+
+    public function testBankFiles(): void
+    {
+        $this->expectNotToPerformAssertions();
+
+        $files = scandir(__DIR__ . '/resources/CZ/raw/');
+
+        foreach ($files as $file) {
+            $filePath = __DIR__ . '/resources/CZ/raw/' . $file;
+
+            if (is_file($filePath)) {
+                $rawContent = file_get_contents(__DIR__ . '/resources/CZ/raw/' . $file);
+
+                $avisoParser = new AvisoParser();
+
+                try {
+                    $aviso = $avisoParser($rawContent);
+                } catch (Exception $exception) {
+                    if ($exception->getCode() !== 1001) {
+                        var_dump($exception);exit;
+                    }
+                }
+            }
+        }
+    }
 }

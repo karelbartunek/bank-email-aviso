@@ -4,20 +4,26 @@ namespace KarelBartunek\BankEmailAvisoParser\MessageParser;
 
 use Brick\Money\Money;
 use DateTimeImmutable;
+use KarelBartunek\BankEmailAvisoParser\Definition\Map;
 use KarelBartunek\BankEmailAvisoParser\Entity\Aviso;
 use KarelBartunek\BankEmailAvisoParser\Exception\ParserException;
 
-class MessageParser
+class TextMessageParser
 {
     private array $config;
+
     private string $emailBody;
     private string $from;
     private string $to;
     private string $subject;
 
-    public function __construct(array $config, string $emailBody, string $from, string $to, string $subject)
-    {
-        $this->config = $config;
+    public function __construct(
+        string $emailBody,
+        string $from,
+        string $to,
+        string $subject
+    ) {
+        $this->config = Map::findByFrom($from);
 
         $emailBody = preg_replace('/\xc2\xa0/', ' ', $emailBody);
 
@@ -78,16 +84,24 @@ class MessageParser
         return $match[1];
     }
 
-    public function parseTextMessage(string $emailBody): string
+    public function parseTextMessage(string $emailBody): ?string
     {
         preg_match($this->config['regex']['cs']['textMessage'], $emailBody, $match);
+
+        if (!isset($match[1])) {
+            return null;
+        }
 
         return trim($match[1]);
     }
 
-    public function parseCustomerName(string $emailBody): string
+    public function parseCustomerName(string $emailBody): ?string
     {
         preg_match($this->config['regex']['cs']['customerName'], $emailBody, $match);
+
+        if (!isset($match[1])) {
+            return null;
+        }
 
         return trim($match[1]);
     }
@@ -103,7 +117,7 @@ class MessageParser
         return trim($match[1]);
     }
 
-    private function parseConstantSymbol(bool $emailBody): ?string
+    private function parseConstantSymbol(string $emailBody): ?string
     {
         preg_match($this->config['regex']['cs']['constantSymbol'], $emailBody, $match);
 

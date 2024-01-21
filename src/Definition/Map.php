@@ -21,6 +21,13 @@ class Map
                     'constantSymbol' => "'Konstantn.*?(\d+).*$'si",
                 ]
             ]
+        ],
+        [
+            'id' => Bank::CSOB,
+            'country' => Country::CZ,
+            'receivedFrom' => 'mm2b2.csob.cz',
+            'from' => 'noreply@csob.cz',
+            'regex' => null
         ]
     ];
 
