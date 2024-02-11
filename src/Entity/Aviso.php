@@ -11,7 +11,7 @@ class Aviso
     private string $customerAccountNumber;
     private ?string $customerName;
     private DateTimeImmutable $date;
-    private string $messageId;
+    private ?string $messageId = null;
     private ?string $textMessage;
     private string $returnPath;
     private string $to;
@@ -76,12 +76,12 @@ class Aviso
         return $this;
     }
 
-    public function getMessageId(): string
+    public function getMessageId(): ?string
     {
         return $this->messageId;
     }
 
-    public function setMessageId(string $messageId): Aviso
+    public function setMessageId(?string $messageId): Aviso
     {
         $this->messageId = $messageId;
         return $this;
