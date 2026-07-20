@@ -1,9 +1,30 @@
 {
     "name": "karelbartunek/bank-email-aviso",
+    "description": "Parser of bank payment-notification emails (avisos) — extracts structured payment data from raw MIME emails of Czech banks (ČSOB, Air Bank)",
     "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "bank",
+        "email",
+        "aviso",
+        "payment-notification",
+        "parser",
+        "csob",
+        "airbank",
+        "czech"
+    ],
+    "support": {
+        "issues": "https://github.com/karelbartunek/bank-email-aviso/issues",
+        "source": "https://github.com/karelbartunek/bank-email-aviso"
+    },
     "autoload": {
         "psr-4": {
             "KarelBartunek\\BankEmailAvisoParser\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KarelBartunek\\BankEmailAvisoParser\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -15,17 +36,24 @@
     ],
     "require": {
         "php": "^8.4",
-        "ext-mbstring": "*",
         "ext-mailparse": "*",
+        "ext-mbstring": "*",
         "brick/money": "^0.14",
         "php-mime-mail-parser/php-mime-mail-parser": "^10.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^13.2",
         "phpstan/phpstan": "^2.2",
-        "squizlabs/php_codesniffer": "^4.0",
-        "phpmd/phpmd": "^2.5",
-        "friendsofphp/php-cs-fixer": "^3.95",
-        "shipmonk/dead-code-detector": "^1.3"
+        "phpunit/phpunit": "^13.2",
+        "shipmonk/dead-code-detector": "^1.3",
+        "squizlabs/php_codesniffer": "^4.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse",
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf"
     }
 }
