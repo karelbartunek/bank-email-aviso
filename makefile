@@ -17,7 +17,7 @@ composer-update:
 	docker exec -i $(CONTAINER) composer update
 
 phpunit:
-	docker exec -i $(CONTAINER) vendor/bin/phpunit tests
+	docker exec -i $(CONTAINER) vendor/bin/phpunit
 
 # QA tools
 phpstan:

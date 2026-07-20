@@ -17,7 +17,7 @@ tools:
 
   phpunit:
     label: PHPUnit
-    command: "vendor/bin/phpunit tests --log-junit {output_dir}/phpunit.xml"
+    command: "vendor/bin/phpunit --log-junit {output_dir}/phpunit.xml"
     output: phpunit.xml
     format: junit
 
