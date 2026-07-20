@@ -1,5 +1,9 @@
 <?php
 
+namespace KarelBartunek\BankEmailAvisoParser\Tests;
+
+use DateTimeImmutable;
+use Exception;
 use KarelBartunek\BankEmailAvisoParser\AvisoParser;
 use PHPUnit\Framework\TestCase;
 
@@ -7,7 +11,7 @@ final class AvisoTest extends TestCase
 {
     public function testBankCsob(): void
     {
-        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/csob_0.txt');
+        $rawContent = (string) file_get_contents(__DIR__ . '/resources/CZ/csob_0.txt');
 
         $avisoParser = new AvisoParser();
         $aviso = $avisoParser($rawContent);
@@ -50,7 +54,7 @@ final class AvisoTest extends TestCase
 
     public function testBankCsob1(): void
     {
-        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/csob_1.txt');
+        $rawContent = (string) file_get_contents(__DIR__ . '/resources/CZ/csob_1.txt');
 
         $avisoParser = new AvisoParser();
         $aviso = $avisoParser($rawContent);
@@ -93,7 +97,7 @@ final class AvisoTest extends TestCase
 
     public function testBankCsob2(): void
     {
-        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/csob_2.txt');
+        $rawContent = (string) file_get_contents(__DIR__ . '/resources/CZ/csob_2.txt');
 
         $avisoParser = new AvisoParser();
         $aviso = $avisoParser($rawContent);
@@ -141,7 +145,7 @@ final class AvisoTest extends TestCase
 
     public function testBankCsob3(): void
     {
-        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/csob_3.txt');
+        $rawContent = (string) file_get_contents(__DIR__ . '/resources/CZ/csob_3.txt');
 
         $avisoParser = new AvisoParser();
         $aviso = $avisoParser($rawContent);
@@ -194,7 +198,7 @@ final class AvisoTest extends TestCase
 
     public function testBankAirBank(): void
     {
-        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/airbank_0.txt');
+        $rawContent = (string) file_get_contents(__DIR__ . '/resources/CZ/airbank_0.txt');
 
         $avisoParser = new AvisoParser();
         $aviso = $avisoParser($rawContent);
@@ -249,11 +253,11 @@ final class AvisoTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        $files = glob(__DIR__ . '/resources/CZ/raw/*.txt');
+        $files = glob(__DIR__ . '/resources/CZ/raw/*.txt') ?: [];
 
         foreach ($files as $filePath) {
             if (is_file($filePath)) {
-                $rawContent = file_get_contents($filePath);
+                $rawContent = (string) file_get_contents($filePath);
 
                 $avisoParser = new AvisoParser();
 
@@ -261,7 +265,8 @@ final class AvisoTest extends TestCase
                     $aviso = $avisoParser($rawContent);
                 } catch (Exception $exception) {
                     if ($exception->getCode() !== 1001) {
-                        var_dump($exception);exit;
+                        var_dump($exception);
+                        exit;
                     }
                 }
             }

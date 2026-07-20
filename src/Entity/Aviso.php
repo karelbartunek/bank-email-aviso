@@ -4,6 +4,9 @@ namespace KarelBartunek\BankEmailAvisoParser\Entity;
 
 use DateTimeImmutable;
 
+/**
+ * @api
+ */
 class Aviso
 {
     private float $amount;

@@ -9,6 +9,7 @@ use KarelBartunek\BankEmailAvisoParser\Exception\ParserException;
 
 abstract class TextMessageParser
 {
+    /** @var array<string, string> */
     private readonly array $config;
 
     private readonly string $emailBody;
@@ -21,7 +22,7 @@ abstract class TextMessageParser
     ) {
         $this->config = $this->getRegexConfig();
 
-        $emailBody = preg_replace('/\xc2\xa0/', ' ', $emailBody);
+        $emailBody = (string) preg_replace('/\xc2\xa0/', ' ', $emailBody);
 
         $this->emailBody = quoted_printable_decode($emailBody);
     }
@@ -33,14 +34,18 @@ abstract class TextMessageParser
      */
     abstract public static function getFromAddresses(): array;
 
+    /** @api */
     abstract public static function getBankId(): string;
 
+    /** @api */
     abstract public static function getCountry(): string;
 
     /**
      * Regex for every field: date, amount, customerAccountNumber,
      * customerName, textMessage, variableSymbol, constantSymbol.
      * The amount regex must capture value in group 2 and currency in group 3.
+     *
+     * @return array<string, string>
      */
     abstract protected function getRegexConfig(): array;
 
@@ -80,7 +85,8 @@ abstract class TextMessageParser
         if (isset($match[1])) {
             try {
                 return new DateTimeImmutable($match[1]);
-            } catch (ParserException $e) {}
+            } catch (\Exception $e) {
+            }
         }
 
         throw new ParserException('Parsing error');

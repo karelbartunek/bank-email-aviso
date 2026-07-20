@@ -21,12 +21,13 @@ class MessageParserFactory
         $parser->setText($rawContent);
 
         $parts = $parser->getParts();
-        if (!isset($parts[1]['headers']['return-path']) || !isset($parts[1]['headers']['content-transfer-encoding'])) {
+        $headers = is_array($parts[1] ?? null) ? ($parts[1]['headers'] ?? null) : null;
+        if (!is_array($headers) || !isset($headers['return-path'], $headers['content-transfer-encoding'])) {
             return null;
         }
-        $to = $parser->getHeader('to');
-        $from = $parser->getHeader('from');
-        $subject = $parser->getHeader('subject');
+        $to = (string) $parser->getHeader('to');
+        $from = (string) $parser->getHeader('from');
+        $subject = (string) $parser->getHeader('subject');
 
         $bodyMessage = $parser->getMessageBody('text');
         $htmlBodyMessage = $parser->getMessageBody('html');
