@@ -192,17 +192,68 @@ final class AvisoTest extends TestCase
         );
     }
 
+    public function testBankAirBank(): void
+    {
+        $rawContent = file_get_contents(__DIR__ . '/resources/CZ/airbank_0.txt');
+
+        $avisoParser = new AvisoParser();
+        $aviso = $avisoParser($rawContent);
+
+        $this->assertEquals(
+            DateTimeImmutable::createFromFormat('d.m.Y h:i:s', '16.07.2026 00:00:00'),
+            $aviso->getDate()
+        );
+
+        $this->assertEquals(
+            50.0,
+            $aviso->getAmount()
+        );
+
+        $this->assertEquals(
+            'CZK',
+            $aviso->getCurrency()
+        );
+
+        $this->assertEquals(
+            '22222222222/3030',
+            $aviso->getCustomerAccountNumber()
+        );
+
+        $this->assertEquals(
+            null,
+            $aviso->getTextMessage()
+        );
+
+        $this->assertEquals(
+            'Jan Nov8k',
+            $aviso->getCustomerName()
+        );
+
+        $this->assertEquals(
+            null,
+            $aviso->getVariableSymbol()
+        );
+
+        $this->assertEquals(
+            null,
+            $aviso->getConstantSymbol()
+        );
+
+        $this->assertEquals(
+            'Zvýšení zůstatku na účtu Osobní účet',
+            $aviso->getSubject()
+        );
+    }
+
     public function testBankFiles(): void
     {
         $this->expectNotToPerformAssertions();
 
-        $files = scandir(__DIR__ . '/resources/CZ/raw/');
+        $files = glob(__DIR__ . '/resources/CZ/raw/*.txt');
 
-        foreach ($files as $file) {
-            $filePath = __DIR__ . '/resources/CZ/raw/' . $file;
-
+        foreach ($files as $filePath) {
             if (is_file($filePath)) {
-                $rawContent = file_get_contents(__DIR__ . '/resources/CZ/raw/' . $file);
+                $rawContent = file_get_contents($filePath);
 
                 $avisoParser = new AvisoParser();
 

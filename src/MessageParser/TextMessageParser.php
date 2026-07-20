@@ -4,11 +4,10 @@ namespace KarelBartunek\BankEmailAvisoParser\MessageParser;
 
 use Brick\Money\Money;
 use DateTimeImmutable;
-use KarelBartunek\BankEmailAvisoParser\Definition\Map;
 use KarelBartunek\BankEmailAvisoParser\Entity\Aviso;
 use KarelBartunek\BankEmailAvisoParser\Exception\ParserException;
 
-class TextMessageParser
+abstract class TextMessageParser
 {
     private array $config;
 
@@ -23,7 +22,7 @@ class TextMessageParser
         string $to,
         string $subject
     ) {
-        $this->config = Map::findByFrom($from);
+        $this->config = $this->getRegexConfig();
 
         $emailBody = preg_replace('/\xc2\xa0/', ' ', $emailBody);
 
@@ -31,6 +30,35 @@ class TextMessageParser
         $this->from = $from;
         $this->to = $to;
         $this->subject = $subject;
+    }
+
+    /**
+     * E-mail addresses the bank sends notifications from.
+     *
+     * @return string[]
+     */
+    abstract public static function getFromAddresses(): array;
+
+    abstract public static function getBankId(): string;
+
+    abstract public static function getCountry(): string;
+
+    /**
+     * Regex for every field: date, amount, customerAccountNumber,
+     * customerName, textMessage, variableSymbol, constantSymbol.
+     * The amount regex must capture value in group 2 and currency in group 3.
+     */
+    abstract protected function getRegexConfig(): array;
+
+    public static function supports(string $from): bool
+    {
+        foreach (static::getFromAddresses() as $address) {
+            if (strpos($from, $address) !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function __invoke(): Aviso
@@ -51,9 +79,9 @@ class TextMessageParser
             ->setTo($this->to);
     }
 
-    public function parseDate(string $emailBody): DateTimeImmutable
+    protected function parseDate(string $emailBody): DateTimeImmutable
     {
-        preg_match($this->config['regex']['cs']['date'], $emailBody, $match);
+        preg_match($this->config['date'], $emailBody, $match);
 
         if (isset($match[1])) {
             try {
@@ -64,18 +92,18 @@ class TextMessageParser
         throw new ParserException('Parsing error');
     }
 
-    public function parseMoney(string $emailBody): Money
+    protected function parseMoney(string $emailBody): Money
     {
-        preg_match($this->config['regex']['cs']['amount'], $emailBody, $match);
+        preg_match($this->config['amount'], $emailBody, $match);
 
         $sanitizedValue = str_replace(',', '.', str_replace(['.', ' '], '', $match[2]));
 
         return Money::of($sanitizedValue, $match[3]);
     }
 
-    public function parseCustomerAccountNumber(string $emailBody): string
+    protected function parseCustomerAccountNumber(string $emailBody): string
     {
-        preg_match($this->config['regex']['cs']['customerAccountNumber'], $emailBody, $match);
+        preg_match($this->config['customerAccountNumber'], $emailBody, $match);
 
         if (empty($match)) {
             return '';
@@ -84,9 +112,9 @@ class TextMessageParser
         return $match[1];
     }
 
-    public function parseTextMessage(string $emailBody): ?string
+    protected function parseTextMessage(string $emailBody): ?string
     {
-        preg_match($this->config['regex']['cs']['textMessage'], $emailBody, $match);
+        preg_match($this->config['textMessage'], $emailBody, $match);
 
         if (!isset($match[1])) {
             return null;
@@ -95,9 +123,9 @@ class TextMessageParser
         return trim($match[1]);
     }
 
-    public function parseCustomerName(string $emailBody): ?string
+    protected function parseCustomerName(string $emailBody): ?string
     {
-        preg_match($this->config['regex']['cs']['customerName'], $emailBody, $match);
+        preg_match($this->config['customerName'], $emailBody, $match);
 
         if (!isset($match[1])) {
             return null;
@@ -106,9 +134,9 @@ class TextMessageParser
         return trim($match[1]);
     }
 
-    public function parseVariableSymbol(string $emailBody): ?string
+    protected function parseVariableSymbol(string $emailBody): ?string
     {
-        preg_match($this->config['regex']['cs']['variableSymbol'], $emailBody, $match);
+        preg_match($this->config['variableSymbol'], $emailBody, $match);
 
         if (!isset($match[1])) {
             return null;
@@ -117,9 +145,9 @@ class TextMessageParser
         return trim($match[1]);
     }
 
-    private function parseConstantSymbol(string $emailBody): ?string
+    protected function parseConstantSymbol(string $emailBody): ?string
     {
-        preg_match($this->config['regex']['cs']['constantSymbol'], $emailBody, $match);
+        preg_match($this->config['constantSymbol'], $emailBody, $match);
 
         if (!isset($match[1])) {
             return null;
