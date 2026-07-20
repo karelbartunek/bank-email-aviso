@@ -2,3 +2,5 @@
 /.idea
 /src/.idea
 /temp
+/storage
+/docker-compose.override.yml

@@ -1,0 +1,38 @@
+output_dir: storage/qa/build
+project_root: /var/www
+path_prefix: /var/www/
+
+tools:
+  phpstan:
+    label: PHPStan
+    command: "php -d memory_limit=1G vendor/bin/phpstan analyse --error-format=checkstyle"
+    output: phpstan.xml
+    format: checkstyle
+
+  phpcs:
+    label: PHP CodeSniffer
+    command: "vendor/bin/phpcs --report=checkstyle --report-file={output_dir}/checkstyle.xml"
+    output: checkstyle.xml
+    format: checkstyle
+
+  phpunit:
+    label: PHPUnit
+    command: "vendor/bin/phpunit tests --log-junit {output_dir}/phpunit.xml"
+    output: phpunit.xml
+    format: junit
+
+  audit:
+    label: Security Audit
+    command: "composer audit --abandoned=report --format=json"
+    output: audit.json
+    format: composer-audit
+
+  gitleaks:
+    label: Gitleaks
+    command: "gitleaks detect --source . {scan_mode} --report-format json --report-path {output_dir}/gitleaks.json --exit-code 0"
+    output: gitleaks.json
+    format: gitleaks
+    base_branch: master
+
+report:
+  ai_prompts: true
