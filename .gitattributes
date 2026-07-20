@@ -1,0 +1,13 @@
+# Exclude development files from dist archives (composer install from Packagist)
+/.docker             export-ignore
+/.editorconfig       export-ignore
+/.gitattributes      export-ignore
+/.github             export-ignore
+/.gitignore          export-ignore
+/docker-compose.yml  export-ignore
+/makefile            export-ignore
+/phpcs.xml           export-ignore
+/phpstan.neon        export-ignore
+/phpunit.xml.dist    export-ignore
+/qa-runner.yaml      export-ignore
+/tests               export-ignore
