@@ -10,7 +10,7 @@ use PhpMimeMailParser\Parser;
 class MessageParserFactory
 {
     /** @var class-string<TextMessageParser>[] */
-    private const PARSERS = [
+    private const array PARSERS = [
         CsobMessageParser::class,
         AirBankMessageParser::class,
     ];

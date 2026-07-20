@@ -4,5 +4,5 @@ namespace KarelBartunek\BankEmailAvisoParser\Definition;
 
 class Country
 {
-    public const CZ = 'CZ'; // Czech Republic
+    public const string CZ = 'CZ'; // Czech Republic
 }

@@ -14,12 +14,13 @@
         }
     ],
     "require": {
+        "php": "^8.4",
         "ext-mbstring": "*",
         "ext-mailparse": "*",
-        "brick/money": "^0.9",
-        "php-mime-mail-parser/php-mime-mail-parser": "^8.0.2"
+        "brick/money": "^0.14",
+        "php-mime-mail-parser/php-mime-mail-parser": "^10.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.6.15"
+        "phpunit/phpunit": "^13.2"
     }
 }

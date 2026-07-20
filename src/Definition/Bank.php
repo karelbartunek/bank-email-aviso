@@ -4,6 +4,6 @@ namespace KarelBartunek\BankEmailAvisoParser\Definition;
 
 class Bank
 {
-    public const CSOB = 'csob'; // Československá obchodní banka, a. s.
-    public const AIR_BANK = 'airbank'; // Air Bank a.s.
+    public const string CSOB = 'csob'; // Československá obchodní banka, a. s.
+    public const string AIR_BANK = 'airbank'; // Air Bank a.s.
 }

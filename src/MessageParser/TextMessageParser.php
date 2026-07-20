@@ -9,27 +9,21 @@ use KarelBartunek\BankEmailAvisoParser\Exception\ParserException;
 
 abstract class TextMessageParser
 {
-    private array $config;
+    private readonly array $config;
 
-    private string $emailBody;
-    private string $from;
-    private string $to;
-    private string $subject;
+    private readonly string $emailBody;
 
     public function __construct(
         string $emailBody,
-        string $from,
-        string $to,
-        string $subject
+        private readonly string $from,
+        private readonly string $to,
+        private readonly string $subject
     ) {
         $this->config = $this->getRegexConfig();
 
         $emailBody = preg_replace('/\xc2\xa0/', ' ', $emailBody);
 
         $this->emailBody = quoted_printable_decode($emailBody);
-        $this->from = $from;
-        $this->to = $to;
-        $this->subject = $subject;
     }
 
     /**
@@ -53,7 +47,7 @@ abstract class TextMessageParser
     public static function supports(string $from): bool
     {
         foreach (static::getFromAddresses() as $address) {
-            if (strpos($from, $address) !== false) {
+            if (str_contains($from, $address)) {
                 return true;
             }
         }
